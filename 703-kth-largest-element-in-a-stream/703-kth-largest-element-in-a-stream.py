@@ -5,7 +5,6 @@ class KthLargest:
         self.k = k
         heapq.heapify(self.heap)
         for _ in range(k, len(nums)): heapq.heappop(self.heap)
-        print(self.heap)
         
         
     def add(self, val: int) -> int:
