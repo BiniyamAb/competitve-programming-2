@@ -19,5 +19,5 @@ class Solution:
                 if indegree[n] == 0: queue.append(n)
             courses+=1
         
-        return courses == numCourses
+        return not courses < numCourses
         
