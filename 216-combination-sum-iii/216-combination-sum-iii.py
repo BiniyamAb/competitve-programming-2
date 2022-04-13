@@ -11,22 +11,16 @@ class Solution:
                     temp_lst.sort()
                     tup = tuple(temp_lst)
                     if tup not in combs:
-                        res.append(list(lst))   
+                        res.append(temp_lst)   
                         combs.add(tup)
-                lst.pop()
-                visited.remove(num)
-                return
-                
-            for i in range(1,10):
-                if i not in visited:
-                    dfs(sum, i)
+            else:
+                for i in range(1,10): 
+                    if i not in visited and sum < n: dfs(sum, i)
                     
             lst.pop()
             visited.remove(num)
             
-        for i in range(1,10):
-            dfs(0, i)
-        
+        for i in range(1,10): dfs(0, i)
         return res
             
         
