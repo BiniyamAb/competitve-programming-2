@@ -1,26 +1,13 @@
 class Solution:
     def combinationSum3(self, k: int, n: int) -> List[List[int]]:
-        res, visited, lst, combs = [], set(), [], set()
-        def dfs(sum, num):
-            visited.add(num)
-            lst.append(num)
-            sum+=num
-            if len(lst) == k:
-                if sum == n: 
-                    temp_lst = list(lst)
-                    temp_lst.sort()
-                    tup = tuple(temp_lst)
-                    if tup not in combs:
-                        res.append(temp_lst)   
-                        combs.add(tup)
-            else:
-                for i in range(1,10): 
-                    if i not in visited and sum < n: dfs(sum, i)
-                    
-            lst.pop()
-            visited.remove(num)
-            
-        for i in range(1,10): dfs(0, i)
-        return res
-            
+        ret = []
+        def dfs(nums, k, n, path):
+            if k < 0 or n < 0:
+                return 
+            if k == 0 and n == 0:
+                ret.append(path)
+            for i in range(len(nums)):
+                dfs(nums[i+1:], k-1, n-nums[i], path+[nums[i]])
         
+        dfs(list(range(1, 10)), k, n, [])
+        return ret
