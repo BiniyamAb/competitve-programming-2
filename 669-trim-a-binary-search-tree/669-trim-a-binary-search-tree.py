@@ -9,13 +9,13 @@ class Solution:
     def trimBST(self, root: Optional[TreeNode], low: int, high: int) -> Optional[TreeNode]:
         def dfs(head):
             if not head: return None
+            if head.val < low: return dfs(head.right)
+            if head.val > high: return dfs(head.left)
+            
             head.left = dfs(head.left)
             head.right = dfs(head.right)
-            
-            if head.val < low: return head.right
-            elif head.val > high: return head.left
-            else: return head
-            
+            return head
+        
         return dfs(root)
             
 
