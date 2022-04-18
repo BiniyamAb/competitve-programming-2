@@ -3,6 +3,7 @@ class Solution:
         n = len(isConnected)
         root = [i for i in range(n)]
         rank = [1] * n
+        
         def find(x):
             if x != root[x]:
                 root[x] = find(root[x])
@@ -11,16 +12,16 @@ class Solution:
         def union(x, y):
             rootX = find(x)
             rootY = find(y)
+            rootX, rootY = sorted([rootX, rootY], key=lambda i: rank[i])
             if rootX != rootY:
-                if rank[rootX] > rank[rootY]:
-                    root[rootY] = rootX
-                    rank[rootX] += rank[rootY]
-                else:
-                    root[rootX] = rootY
-                    rank[rootY] += rank[rootX]
+                root[rootX] = rootY
+                rank[rootY] += rank[rootX]
+        
+        def connected(x,y):
+            return find(x) == find(y)
         
         for x in range(n):
             for y in range(len(isConnected[0])):
-                if x!=y and (isConnected[x][y] == 1 or find(x) == find(y)): union(x, y)
+                if x!=y and (isConnected[x][y] == 1 or connected(x,y)): union(x, y)
         
         return len(set(root))
