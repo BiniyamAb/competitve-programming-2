@@ -4,9 +4,8 @@ class Solution:
         root = [i for i in range(n)]
         rank = [1] * n
         def find(x):
-            if x == root[x]:
-                return x
-            root[x] = find(root[x])
+            if x != root[x]:
+                root[x] = find(root[x])
             return root[x]
         
         def union(x, y):
@@ -15,11 +14,10 @@ class Solution:
             if rootX != rootY:
                 if rank[rootX] > rank[rootY]:
                     root[rootY] = rootX
-                elif rank[rootY] > rank[rootX]:
-                    root[rootX] = rootY
+                    rank[rootX] += rank[rootY]
                 else:
                     root[rootX] = rootY
-                    rank[rootY] += 1
+                    rank[rootY] += rank[rootX]
         
         for x in range(n):
             for y in range(len(isConnected[0])):
