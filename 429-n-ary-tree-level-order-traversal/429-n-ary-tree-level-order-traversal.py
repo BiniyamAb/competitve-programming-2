@@ -14,9 +14,8 @@ class Solution:
             lst = []
             for _ in range(len(queue)):
                 curr = queue.popleft()
-                if curr.children:
-                    for node in curr.children:
-                        if node: queue.append(node)
+                for node in curr.children:
+                    queue.append(node)
                 lst.append(curr.val)
             res.append(lst)
         
