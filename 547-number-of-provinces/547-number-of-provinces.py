@@ -16,6 +16,7 @@ class Solution:
             if rootX != rootY:
                 root[rootX] = rootY
                 rank[rootY] += rank[rootX]
+                rank[rootX] -= rank[rootX]
         
         def connected(x,y):
             return find(x) == find(y)
@@ -24,4 +25,6 @@ class Solution:
             for y in range(len(isConnected[0])):
                 if x!=y and (isConnected[x][y] == 1 or connected(x,y)): union(x, y)
         
-        return len(set(root))
+        count = 0
+        for ele in rank: count += 1 if ele != 0 else 0
+        return count
