@@ -14,4 +14,5 @@ class Solution:
             if ans == 0: return mid
             elif ans == 1: l = mid + 1
             else: r = mid - 1
+        return -1
         
