@@ -1,13 +1,24 @@
 class Solution:
     def combinationSum3(self, k: int, n: int) -> List[List[int]]:
-        ret = []
-        def dfs(nums, k, n, path):
-            if k < 0 or n < 0:
-                return 
-            if k == 0 and n == 0:
-                ret.append(path)
-            for i in range(len(nums)):
-                dfs(nums[i+1:], k-1, n-nums[i], path+[nums[i]])
+        combs, visited, lst, path = [], set(), [], set()
         
-        dfs(list(range(1, 10)), k, n, [])
-        return ret
+        def dfs():
+            if len(lst) == k:
+                temp = list(lst)
+                temp.sort()
+                tup = tuple(temp)
+                if tup not in visited and sum(lst) == n:
+                    combs.append(temp)
+                    visited.add(tup)
+                return
+            for i in range(1,10):
+                if i not in path:
+                    lst.append(i)
+                    path.add(i)
+                    dfs()
+                    lst.pop()
+                    path.remove(i)
+        dfs()
+        return combs
+        
+            
