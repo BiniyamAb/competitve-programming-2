@@ -6,17 +6,8 @@
 #         self.right = right
 class Solution:
     def deepestLeavesSum(self, root: Optional[TreeNode]) -> int:
-        queue = deque([root])
-        sum = 0
-        
-        while queue:
-            n, temp = len(queue), 0
-            for _ in range(n):
-                curr = queue.popleft()
-                if curr.left: queue.append(curr.left)
-                if curr.right: queue.append(curr.right)
-                temp+=curr.val
-            sum = temp
-        
-        return sum
+        q = [root]
+        while q:
+            pre, q = q, [child for p in q for child in [p.left, p.right] if child]
+        return sum(node.val for node in pre)
         
