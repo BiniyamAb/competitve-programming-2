@@ -1,7 +1,6 @@
 class Solution:
     def getAncestors(self, n: int, edges: List[List[int]]) -> List[List[int]]:
-        answer = []
-        for _ in range(n): answer.append(set())
+        answer = [set() for _ in range(n)]
         indegree, neighbours = defaultdict(int), defaultdict(list)
         
         for i in range(len(edges)):
