@@ -3,7 +3,7 @@ class Solution:
         new = 0
         for _ in range(32):
             new <<= 1
-            if n & 1: new+=1
+            new |= (n&1)
             n >>= 1
         
         return new
