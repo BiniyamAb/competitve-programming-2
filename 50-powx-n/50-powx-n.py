@@ -1,8 +1,8 @@
 class Solution:
     def myPow(self, x: float, n: int) -> float:       
-        answer = self.helper(x,abs(n))
         if n < 0: 
-            answer = 1 / answer
+            x = 1 / x
+        answer = self.helper(x,abs(n))
         return answer
 
     def helper(self,x,n):
