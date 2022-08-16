@@ -1,32 +1,13 @@
-class TrieNode:
-    def __init__(self):
-        self.children = [None] * 26
-        self.count = 0
-        
-
-class Trie:
-    def __init__(self):
-        self.root = TrieNode()
-    
-    def insert(self,word):
-        curr = self.root
-        for ch in word:
-            ind = ord(ch) - ord("a")
-            if curr.children[ind] == None: curr.children[ind] = TrieNode()
-            curr.children[ind].count+=1
-            curr = curr.children[ind]
-    
-    def prefixCount(self,pre):
-        curr = self.root
-        for ch in pre:
-            ind = ord(ch) - ord("a")
-            if curr.children[ind] == None: return 0
-            curr = curr.children[ind]
-        
-        return curr.count
-
 class Solution:
     def prefixCount(self, words: List[str], pref: str) -> int:
-        words_trie = Trie()
-        for word in words: words_trie.insert(word)
-        return words_trie.prefixCount(pref)
+        def isPrefix(prefix,word):
+            if len(word) < len(prefix): return False
+            for i in range(len(prefix)):
+                if word[i] != prefix[i]: return False
+            return True
+        
+        count = 0
+        for word in words:
+            if isPrefix(pref,word): count+=1
+        
+        return count
