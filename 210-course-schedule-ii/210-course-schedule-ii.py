@@ -2,17 +2,14 @@ from collections import defaultdict, deque
 class Solution:
     def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
         graph = defaultdict(list)
-        incoming = defaultdict(int)
-        
-        for ith_node in range(numCourses):
-            incoming[ith_node]
+        incoming = [0] * numCourses
         
         for a, b in prerequisites:
             graph[b].append(a)
             incoming[a] += 1
             
         todo = deque([])
-        for index, count in incoming.items():
+        for index, count in enumerate(incoming):
             if count == 0:
                 todo.append(index)
         
