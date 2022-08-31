@@ -1,22 +1,32 @@
+from collections import defaultdict, deque
 class Solution:
     def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
-        indegree, neighbours, courses, order = {}, {}, 0, []
-        for j in range(numCourses): indegree[j], neighbours[j] = 0, []
-        for i in range(len(prerequisites)):
-            dst, src = prerequisites[i]
-            indegree[dst] += 1
-            neighbours[src].append(dst)
-            
-        queue = deque()
-        for k, v in indegree.items():
-            if v == 0: queue.append(k)
-                
-        while queue:
-            curr = queue.popleft()
-            order.append(curr)
-            for n in neighbours[curr]:
-                indegree[n] -= 1
-                if indegree[n] == 0: queue.append(n)
-            courses+=1
+        graph = defaultdict(list)
+        incoming = defaultdict(int)
         
-        return order if courses == numCourses else []
+        for ith_node in range(numCourses):
+            incoming[ith_node]
+        
+        for a, b in prerequisites:
+            graph[b].append(a)
+            incoming[a] += 1
+            
+        todo = deque([])
+        for index, count in incoming.items():
+            if count == 0:
+                todo.append(index)
+        
+        answer = []
+        while todo:
+            current_node = todo.popleft()
+            answer.append(current_node)
+            for neighbor in graph[current_node]:
+                incoming[neighbor] -= 1
+                if incoming[neighbor] == 0:
+                    todo.append(neighbor)
+        
+        course_length = len(answer)
+        if course_length != numCourses:
+            return []
+        
+        return answer
