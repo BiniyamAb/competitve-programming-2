@@ -16,7 +16,6 @@ class Solution:
                 else:
                     root.right = new_node
                     return node
-                
             elif root.val > val:
                 if root.left:
                     root = root.left
