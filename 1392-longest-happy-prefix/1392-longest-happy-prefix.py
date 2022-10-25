@@ -9,9 +9,5 @@ class Solution:
                 LPS[i] = pointer + 1
                 pointer += 1
         
-        res = []
-        for i in range(LPS[-1]):
-            res.append(s[i])
-        
-        return "".join(res)
+        return s[:LPS[-1]]
             
