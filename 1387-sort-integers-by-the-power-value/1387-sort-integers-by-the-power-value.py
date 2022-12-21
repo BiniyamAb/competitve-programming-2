@@ -1,5 +1,5 @@
 class Solution:
-    # @cache
+    @cache
     def getPowerValue(self, x):
         if x == 1: 
             return 0
