@@ -2,6 +2,7 @@ class Solution:
     
     def longestStrChain(self, words: List[str]) -> int:
         path = set()
+        words.sort(key=lambda word: len(word))
         
         def isPredecessor(word1, word2):
             if len(word2) - len(word1) != 1: 
@@ -27,8 +28,8 @@ class Solution:
         def dp(i):
             max_length = 0
             path.add(i)
-            for j in range(len(words)):
-                if j != i and j not in path and isPredecessor(words[i], words[j]):
+            for j in range(i+1,len(words)):
+                if isPredecessor(words[i], words[j]):
                     length = dp(j)
                     max_length = max(max_length, length)
                     
