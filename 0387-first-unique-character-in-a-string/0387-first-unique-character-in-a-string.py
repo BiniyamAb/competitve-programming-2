@@ -2,7 +2,8 @@ class Solution:
     def firstUniqChar(self, s: str) -> int:
         indices = defaultdict(list)
         for i in range(len(s)):
-            indices[s[i]].append(i)
+            if len(indices[s[i]]) < 2:
+                indices[s[i]].append(i)
         
         index = float("inf")
         for k, v in indices.items():
