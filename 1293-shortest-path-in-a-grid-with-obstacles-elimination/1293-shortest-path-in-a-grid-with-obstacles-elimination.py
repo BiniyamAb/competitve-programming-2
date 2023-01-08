@@ -2,7 +2,7 @@ class Solution:
     def shortestPath(self, grid: List[List[int]], k: int) -> int:
         N, M = len(grid), len(grid[0])
         inBound = lambda r, c: 0 <= r < N and 0 <= c < M
-        visited = {(0,0,k)}
+        visited = {(0,0): k}
         queue = deque([(0,0,k,0)])
         DIR = (1,0,-1,0,1)
 
@@ -19,9 +19,9 @@ class Solution:
                     if grid[new_r][new_c] == 1:
                         new_k -= 1
                     new_move = (new_r,new_c,new_k,new_steps)
-                    if (new_r,new_c,new_k) not in visited and new_k >= 0:
+                    if ((new_r,new_c) not in visited or new_k > visited[(new_r,new_c)]) and new_k >= 0:
                         queue.append(new_move)
-                        visited.add((new_r,new_c,new_k))
+                        visited[(new_r,new_c)] = new_k
         
         return -1
         
