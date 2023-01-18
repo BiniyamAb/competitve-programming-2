@@ -6,4 +6,3 @@ class Solution:
             cost = max(cost, curr_cost)
         
         return cost
-        
