@@ -7,11 +7,11 @@
 class Solution:
     def verticalTraversal(self, root: Optional[TreeNode]) -> List[List[int]]:
         dictionary = defaultdict(list)
-        queue = [(root, 0, 0)]
+        queue = deque([(root, 0, 0)])
         ans = []
         while queue:
             for _ in range(len(queue)):
-                node, horizontal, vertical = queue.pop(0)
+                node, horizontal, vertical = queue.popleft()
                 dictionary[horizontal].append((vertical,node.val))
                 if node.left:
                     queue.append((node.left, horizontal-1, vertical-1))
