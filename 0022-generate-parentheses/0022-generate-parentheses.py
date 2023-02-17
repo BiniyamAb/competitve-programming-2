@@ -3,7 +3,6 @@ class Solution:
         res = []
         path = []
         def bt(openn, closed, path):
-            nonlocal n
             if openn + closed == n * 2:
                 res.append("".join(path))
                 return
