@@ -20,26 +20,29 @@
 #        Return None if this NestedInteger holds a single integer
 #        """
 
-class NestedIterator:
-    def __init__(self, nestedList: [NestedInteger]):
-        self.depth = [[nestedList, 0]]
-    
-    def next(self) -> int:
-        nestedList, i = self.depth[-1]
-        self.depth[-1][1] += 1
+class NestedIterator(object):
+
+    def __init__(self, nestedList):
+        self.stack = [[nestedList, 0]]
+
+    def next(self):
+        self.hasNext()
+        nestedList, i = self.stack[-1]
+        self.stack[-1][1] += 1
         return nestedList[i].getInteger()
-        
-    
-    def hasNext(self) -> bool:
-        while self.depth:
-            nestedList, i = self.depth[-1]
             
-            if i == len(nestedList): self.depth.pop()
-            elif nestedList[i].isInteger(): return True
+    def hasNext(self):
+        s = self.stack
+        while s:
+            nestedList, i = s[-1]
+            if i == len(nestedList):
+                s.pop()
             else:
-                self.depth[-1][1] += 1
-                self.depth.append([nestedList[i].getList(), 0])
-                
+                x = nestedList[i]
+                if x.isInteger():
+                    return True
+                s[-1][1] += 1
+                s.append([x.getList(), 0])
         return False
          
 
