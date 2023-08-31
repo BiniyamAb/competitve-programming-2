@@ -1,26 +1,31 @@
 class Solution:
     def minTaps(self, n: int, ranges: List[int]) -> int:
-        intervals = []
-        for i in range(n + 1):
-            left = max(0, i - ranges[i])
-            right = min(n, i + ranges[i])
-            intervals.append((left, right))
-
-        intervals.sort(key=lambda x: x[0])
-        curr_end = 0
-        next_end = 0
-        num_taps = 0
+        N = len(ranges)
+        tap_intervals = []
+        for i in range(N):
+            if ranges[i] != 0:
+                tap_intervals.append( (max(i-ranges[i], 0), min(i+ranges[i], N-1)) )
+            
+        tap_intervals.sort()
+        
+        N = len(tap_intervals)
         i = 0
-
-        while i <= n and curr_end < n:
-            while i <= n and intervals[i][0] <= curr_end:
-                next_end = max(next_end, intervals[i][1])
+        tap_opened = 0
+        last = 0
+        while i < N:
+            temp = 0
+            while i < N and tap_intervals[i][0] <= last:
+                temp = max(temp, tap_intervals[i][1])
                 i += 1
-
-            if curr_end == next_end:
-                return -1
-
-            num_taps += 1
-            curr_end = next_end
-
-        return num_taps
+                
+            if temp == 0: return -1
+            if temp > last:
+                last = temp
+                tap_opened += 1
+            
+        
+        if tap_opened == 0: return -1  
+        if last < len(ranges)-1: return -1
+        return tap_opened
+            
+        
