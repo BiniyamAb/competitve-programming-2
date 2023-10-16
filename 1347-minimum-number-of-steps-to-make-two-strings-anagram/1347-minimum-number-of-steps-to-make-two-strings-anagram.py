@@ -1,17 +1,10 @@
 class Solution:
     def minSteps(self, s: str, t: str) -> int:
-        s_count = Counter(s)
+        s_count = Counter(s) 
         t_count = Counter(t)
         
-        min_steps = 0
+        steps = 0
+        for k in t_count:
+            steps += max(0, t_count[k] - s_count[k])
         
-        for key, value in s_count.items():
-            if key in t_count:
-                diff =  max(0, value - t_count[key])
-            else: diff = value
-            
-            min_steps += diff
-        
-        return min_steps
-                
-        
+        return steps
