@@ -1,16 +1,16 @@
 class Solution:
     def longestPalindrome(self, s):
-        res = ""
+        result = ""
         for i in range(len(s)):
             # odd case, like "aba"
             temp = self.helper(s, i, i)
-            if len(temp) > len(res):
-                res = temp
+            if len(temp) > len(result):
+                result = temp
             # even case, like "abba"
             temp = self.helper(s, i, i+1)
-            if len(temp) > len(res):
-                res = temp
-        return res
+            if len(temp) > len(result):
+                result = temp
+        return result
 
     # get the longest palindrome, l, r are the middle indexes   
     # from inner to outer
