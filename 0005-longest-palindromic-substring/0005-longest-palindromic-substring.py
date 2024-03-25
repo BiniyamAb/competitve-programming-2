@@ -3,13 +3,13 @@ class Solution:
         res = ""
         for i in range(len(s)):
             # odd case, like "aba"
-            tmp = self.helper(s, i, i)
-            if len(tmp) > len(res):
-                res = tmp
+            temp = self.helper(s, i, i)
+            if len(temp) > len(res):
+                res = temp
             # even case, like "abba"
-            tmp = self.helper(s, i, i+1)
-            if len(tmp) > len(res):
-                res = tmp
+            temp = self.helper(s, i, i+1)
+            if len(temp) > len(res):
+                res = temp
         return res
 
     # get the longest palindrome, l, r are the middle indexes   
